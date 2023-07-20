@@ -17,9 +17,10 @@ public class EnviroApplication {
     @Bean
     public CommandLineRunner commandLineRunner(FileParser fileParser){
         return runner->{
-            File file = new File("/home/karabo/Downloads/Dev_AssessmentCsv_Ref003.csv");
+            String csvFilePath = "";
+            File file = new File(csvFilePath);
             fileParser.parseCSV(file);
-            System.out.println("Save user's profiles");
+            System.out.println("Saved user's profiles");
         };
     }
 

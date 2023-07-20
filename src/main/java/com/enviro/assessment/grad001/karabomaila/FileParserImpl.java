@@ -43,7 +43,7 @@ public class FileParserImpl implements FileParser{
                 File image = convertCSVDataToImage(data[2], data[3]);
                 URI uri = createImageLink(image);
                 accountProfile.setImageLink(uri.toString());
-
+                // save the account profile
                 userService.saveUserProfile(accountProfile);
             }
             scanner.close();
@@ -54,11 +54,11 @@ public class FileParserImpl implements FileParser{
 
     @Override
     public File convertCSVDataToImage(String imageFormat, String base64ImageData) {
-//        File file = new File()
         String uniqueFileName = UUID.randomUUID().toString();
         String imageFileName = null;
         if (imageFormat.equalsIgnoreCase("image/jpeg")) imageFileName = uniqueFileName + ".jpeg";
         else if (imageFormat.equalsIgnoreCase("image/png")) imageFileName = uniqueFileName + ".png";
+        else if (imageFormat.equalsIgnoreCase("image/jpg")) imageFileName = uniqueFileName + ".jpg";
 
         try {
             byte[] bytes = Base64.getDecoder().decode(base64ImageData);
@@ -76,10 +76,5 @@ public class FileParserImpl implements FileParser{
     @Override
     public URI createImageLink(File fileImage) {
         return fileImage.toURI();
-    }
-
-    private boolean isFileNameUnique(String fileName){
-
-        return true;
     }
 }
